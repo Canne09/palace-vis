@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>中国历代皇宫文化 | 水墨宣纸·千年传承</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="royal-watermark"></div>
+<div class="app-container">
+    
+    <section class="page active" id="homePage">
+        <div class="center-title-box">
+            <h1 class="ink-title">中国历代皇宫文化</h1>
+            <p class="ink-subtitle">千年传承 · 盛世华章</p>
+        </div>
+        <button class="nav-btn top-left" onclick="switchPage('dataPage')">
+            <img class="icon-img" src="assets/icons/data-icon.png" alt="综合数据" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23FAF5E4\'/%3E%3Cpath fill=\'%23A67C00\' d=\'M30,70 L45,40 L60,60 L75,30 L80,35 L60,70 L45,50 L35,70Z\'/%3E%3C/svg%3E'">
+            <span>综合数据</span>
+        </button>
+        <button class="nav-btn top-right" onclick="switchPage('geoPage')">
+            <img class="icon-img" src="assets/icons/geo-icon.png" alt="地理分布" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'45\' r=\'20\' fill=\'none\' stroke=\'%23A67C00\' stroke-width=\'3\'/%3E%3Cpath fill=\'%23A67C00\' d=\'M50,65 L45,80 L55,80Z\'/%3E%3C/svg%3E'">
+            <span>地理分布</span>
+        </button>
+        <button class="nav-btn bottom-left" onclick="switchPage('culturePage')">
+            <img class="icon-img" src="assets/icons/culture-icon.png" alt="功能文化" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Cpath fill=\'%23A67C00\' d=\'M30,50 L50,30 L70,50 L50,70Z\'/%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'8\' fill=\'%23FAF5E4\'/%3E%3C/svg%3E'">
+            <span>功能与文化</span>
+        </button>
+        <button class="nav-btn bottom-right" onclick="switchPage('timelinePage')">
+            <img class="icon-img" src="assets/icons/timeline-icon.png" alt="历代卷轴" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect x=\'25\' y=\'30\' width=\'50\' height=\'40\' fill=\'none\' stroke=\'%23A67C00\' stroke-width=\'2\'/%3E%3Cpath stroke=\'%23A67C00\' d=\'M35,45 L65,45 M35,55 L55,55\' stroke-width=\'2\'/%3E%3C/svg%3E'">
+            <span>历代卷轴</span>
+        </button>
+    </section>
+
+    <section class="page" id="dataPage">
+        <button class="back-btn" onclick="switchPage('homePage')">← 返回首页</button>
+        <div class="container">
+            <h2 class="page-title">📜 宫阙数据综览</h2>
+            <div class="grid-2" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <h3 style="color: var(--gold); border-left: 3px solid var(--gold); padding-left: 12px;">宫城面积占比</h3>
+                    <div id="chart-area" class="echart-box"></div>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--gold); border-left: 3px solid var(--gold); padding-left: 12px;">中轴线长度规模</h3>
+                    <div id="chart-axis" class="echart-box"></div>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--gold); border-left: 3px solid var(--gold); padding-left: 12px;">帝王临朝频次</h3>
+                    <div id="chart-kings" class="echart-box"></div>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--gold); border-left: 3px solid var(--gold); padding-left: 12px;">营造时长统计</h3>
+                    <div id="chart-build" class="echart-box"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page" id="geoPage">
+        <button class="back-btn" onclick="switchPage('homePage')">← 返回首页</button>
+        <div class="container">
+            <h2 class="page-title">🗺️ 皇宫地理分布</h2>
+            <div class="geo-layout">
+                <!-- 地图图片区域（请替换为标准地图图片，并保留审图号标注） -->
+                <div class="map-container" id="static-map-container">
+                    <img id="china-static-map" src="assets/images/china-map.jpg" 
+                        alt="中国地图 · 审图号：GS（2022）4306号" 
+                        style="width:100%; height:auto; display:block; border-radius:16px;">
+                    <div class="map-approval-note">审图号：GS（2022）4306号</div>
+                </div>
+
+                <!-- 右侧信息面板（保持不变） -->
+                <div class="info-panel">
+                    <h3 id="geo-region-name">请选择省份</h3>
+                    <!-- 新增：省份选择下拉菜单 -->
+                    <div class="province-selector">
+                        <label for="province-select">选择省份：</label>
+                        <select id="province-select">
+                            <option value="">-- 请选择 --</option>
+                            <option value="北京">北京</option>
+                            <option value="河北">河北</option>
+                            <option value="山西">山西</option>
+                            <option value="内蒙古">内蒙古</option>
+                            <option value="辽宁">辽宁</option>
+                            <option value="黑龙江">黑龙江</option>
+                            <option value="江苏">江苏</option>
+                            <option value="浙江">浙江</option>
+                            <option value="安徽">安徽</option>
+                            <option value="福建">福建</option>
+                            <option value="河南">河南</option>
+                            <option value="广东">广东</option>
+                            <option value="重庆">重庆</option>
+                            <option value="四川">四川</option>
+                            <option value="贵州">贵州</option>
+                            <option value="云南">云南</option>
+                            <option value="西藏">西藏</option>
+                            <option value="陕西">陕西</option>
+                            <option value="宁夏">宁夏</option>
+                            <option value="新疆">新疆</option>
+                        </select>
+                    </div>
+                    <div id="geo-palaces-list">
+                        <p style="color: #f2be3b;">请从下拉菜单中选择省份，<br>探索历代皇宫地理坐标。</p>
+                    </div>
+                    <div id="geo-note" class="geo-note"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page" id="culturePage">
+        <button class="back-btn" onclick="switchPage('homePage')">← 返回首页</button>
+        <div class="container">
+            <h2 class="page-title">🏮 营造技艺 · 宫廷文化</h2>
+            <div id="culture-corridor"></div>
+            
+            <div class="card" style="margin-top: 2rem;">
+                <h3>📌 皇宫功能演变</h3>
+                <p>从秦汉多宫制到明清紫禁城单一宫城，集政治、文化、礼仪于一体，是中华文明核心载体。</p>
+                <div id="chart-func" class="echart-box" style="height: 350px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page" id="timelinePage">
+        <button class="back-btn" onclick="switchPage('homePage')">← 返回首页</button>
+        <div class="container">
+            <h2 class="page-title">📜 历代宫城卷轴</h2>
+            
+            <div class="tl-stage">
+                <div class="stage-img-container">
+                    <img id="stage-img" class="stage-img" src="" alt="">
+                </div>
+                <div id="stage-default-text" class="stage-default-text">悬浮下方节点，预览历代宫阙</div>
+                <div id="stage-info" class="stage-info">
+                    <h3 id="stage-title" class="stage-title"></h3>
+                    <p id="stage-subtitle" class="stage-subtitle"></p>
+                </div>
+            </div>
+
+            <div class="tl-scroll-wrap">
+                <div class="tl-progress-bar"><div id="tl-progress"></div></div>
+                <div id="tl-wrap">
+                    <div id="tl-nodes"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div id="detail-overlay" class="detail-overlay">
+        <div class="detail-modal">
+            <div class="close-detail" onclick="closeDetail()">×</div>
+            <div class="detail-header">
+                <div class="detail-era" id="d-era"></div>
+                <h2 class="detail-title" id="d-title"></h2>
+                <div class="detail-period" id="d-period"></div>
+            </div>
+            <div class="detail-body">
+                <div class="detail-intro" id="d-intro"></div>
+                <div class="detail-stats">
+                    <h4>建筑规制</h4>
+                    <div class="stats-grid" id="d-stats-grid"></div>
+                </div>
+                <div class="detail-tech">
+                    <h4>营造技艺突破</h4>
+                    <div class="tech-text" id="d-tech-text"></div>
+                    <div class="tech-tags" id="d-tech-tags"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/charts.js"></script>
+<script src="js/map.js"></script>
+<script src="js/culture.js"></script>
+<script src="js/timeline.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
