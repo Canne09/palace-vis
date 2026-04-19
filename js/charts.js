@@ -6,7 +6,7 @@
 
 // 基础数据（已由项目提供）
 const chartData = [
-    { name: '秦咸阳宫',   area: 372,  axis: 0,    kings: 7,  build: 143 },
+    { name: '秦咸阳宫',   area: 500,  axis: 0,    kings: 7,  build: 143 },
     { name: '汉未央宫',   area: 484,  axis: 1800, kings: 34, build: 5   },
     { name: '隋紫微城',   area: 420,  axis: 2500, kings: 45, build: 1   },
     { name: '唐大明宫',   area: 320,  axis: 2200, kings: 17, build: 29  },
